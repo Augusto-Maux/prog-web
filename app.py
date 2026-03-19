@@ -1,14 +1,15 @@
-from flask import Flask # IMPORTAÇÃO
+from flask import Flask, render_template # IMPORTAÇÃO
 
 app = Flask(__name__) # INSTÂNCIA DA CLASSE FLASK
 
 @app.route('/')
 def index():
-    return 'Olá Mundo!'
+    return render_template('index.html')
 
+# @app.route('/fale-conosco') -> POR ISSO É MELHOR USAR {{ url_for(função) }}, POIS HÁ DIFERENTES ROTAS PARA MESMA FUNÇÃO
 @app.route('/contato')
 def contato():
-    return 'augusto.maux@escolar.ifrn.edu.br'
+    return render_template('contato.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

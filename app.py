@@ -9,3 +9,6 @@ def index():
 @app.route('/contato')
 def contato():
     return 'augusto.maux@escolar.ifrn.edu.br'
+
+if __name__ == '__main__':
+    app.run()

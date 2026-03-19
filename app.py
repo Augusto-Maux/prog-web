@@ -1,5 +1,7 @@
-from flask import Flask
-app = Flask(__name__)
+from flask import Flask # IMPORTAÇÃO
+
+app = Flask(__name__) # INSTÂNCIA DA CLASSE FLASK
+
 @app.route('/')
 def index():
     return 'Olá Mundo!'

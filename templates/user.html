@@ -7,11 +7,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <!-- <img src="{{ url_for('static', filename='img/lion.jpg') }}" onclick="cliqueAqui()" /> -->
+<img src="{{ url_for('static', filename='img/'+nome+'.jpg') }}" onclick="cliqueAqui('{{ nome }}')"/>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
-    <p>Nome: {{ dados.nome }}</p>
-    <p>E-mail: {{ dados.email }}</p>
-    <p>Telefone: {{ dados.tel }}</p> 
+
+    <p>Nome: {{ nome }}</p>
 </body>
 </html>

@@ -24,6 +24,11 @@ def contato():
 def usuario(nome, sobrenome):
     info = { "nome" : nome, "sobrenome" : sobrenome }
     return render_template('usuario.html', info = info)
+    
+# @app.route('/user', defaults = {"nome" : "Desconhecido"})
+@app.route('/user/<nome>')
+def user(nome):
+    return render_template('user.html', nome = nome)
 
 @app.route('/semestre/<int:x>')
 def semestre(x):

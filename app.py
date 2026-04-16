@@ -1,4 +1,5 @@
-from flask import Flask, render_template # IMPORTAÇÃO
+from flask import Flask, render_template, request
+from datetime import datetime # IMPORTAÇÃO
 
 app = Flask(__name__) # INSTÂNCIA DA CLASSE FLASK
 
@@ -37,6 +38,25 @@ def semestre(x):
     data["atual"] = x
     data["anterior"] = x - 1
     return render_template('semestre.html', data = data)
+
+@app.route('/dados')
+def dados():
+    return render_template('formulario.html')
+
+@app.route('/recebedados', methods=['GET', 'POST'])
+def recebedados():
+    nome = request.args.get("nome")
+    email = request.args.get("email")
+    nome_post = request.form["nome"]
+    email_post = request.form["email"]
+    estado = request.form["estado"]
+    formacao = request.form["formacao"]
+    modalidades = request.form.getlist("modalidades")
+    data_nasc = request.form["data"]
+    data_obj = datetime.strptime(data_nasc, "%Y-%m-%d")
+    data_nasc_br = data_obj.strftime("%d/%m/%Y")
+
+    return f"{nome_post} - {email_post} - {estado} - {formacao} - {modalidades} - {data_nasc_br}"
 
 if __name__ == '__main__':
     app.run(debug=True)

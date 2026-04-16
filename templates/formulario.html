@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{{ url_for('recebedados') }}" method="post">
+        <label>Nome: </label>
+        <input type="text" name="nome"><br/>
+        <label>E-mail: </label>
+        <input type="text" name="email"><br/>
+        <select name="estado">
+            <option value="RN"> Rio Grande do Norte </option>
+	        <option value="PB"> Paraíba </option>
+	        <option value="PE"> Pernambuco</option>
+	        <option value="CE"> Ceará </option>
+        </select>
+
+        Formação
+        <input type="radio" name="formacao" value="fundamental">Ensino Fundamental<br>
+        <input type="radio" name="formacao" value="medio">Ensino Médio<br>
+        <input type="radio" name="formacao" value="superior">Ensino Superior
+
+        Modalidades
+        <input type="checkbox" name="modalidades" value="Natação"> Natação<br>
+        <input type="checkbox" name="modalidades" value="Vôlei"> Vôlei<br>
+        <input type="checkbox" name="modalidades" value="Futebol"> Futebol<br>
+        <input type="checkbox" name="modalidades" value="Judô"> Judô<br>
+
+        <input type="date" name="data">
+
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

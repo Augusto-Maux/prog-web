@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime # IMPORTAÇÃO
 
 app = Flask(__name__) # INSTÂNCIA DA CLASSE FLASK
@@ -57,6 +57,39 @@ def recebedados():
     data_nasc_br = data_obj.strftime("%d/%m/%Y")
 
     return f"{nome_post} - {email_post} - {estado} - {formacao} - {modalidades} - {data_nasc_br}"
+
+
+
+@app.route('/verificaridade/<int:idade>')
+def verificaridade(idade):
+    return render_template('verificaridade.html', idade=idade)
+
+@app.route('/situacaofinal/<float:nota>')
+def situacao_final(nota):
+    if nota >= 6:
+        return 'Aprovado'
+    
+    elif nota >= 3:
+        return 'Recuperação'
+
+    else:
+        return 'Reprovado'
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/verificarlogin', methods=['POST'])
+def verificarlogin():
+
+    if request.method == 'POST':
+        login = request.form['login']
+        senha = request.form['senha']
+
+        if login == 'admin' and senha == '12345':
+            return redirect(url_for('index'))
+        else:
+            return 'Sem permissão'
 
 if __name__ == '__main__':
     app.run(debug=True)

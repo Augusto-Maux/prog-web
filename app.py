@@ -91,5 +91,27 @@ def verificarlogin():
         else:
             return 'Sem permissão'
 
+@app.route('/numero/<int:n>')
+def numero(n):
+	return render_template('numero.html', n=n)
+
+@app.route('/escolheritens')
+def escolheritens():
+	return render_template('escolheritens.html')
+
+@app.route('/compras')
+def compras():
+	itens = request.args.getlist("itens")
+	return render_template('compras.html', itens=itens)
+
+@app.route('/contatos')
+def contatos():
+	dados = [
+			{'nome':'Alba', 'telefone':'9999-8888'},
+			{'nome':'Maria', 'telefone':'7777-6666'},
+			{'nome':'Carla', 'telefone':'5555-4444'}
+	]
+	return render_template('contatos.html', dados=dados)
+
 if __name__ == '__main__':
     app.run(debug=True)

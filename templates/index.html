@@ -4,13 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="../static/script.js"></script>
 </head>
 <body>
-    <ul>
-        <li><a href="{{ url_for('contato') }}">Contato</a></li> <!-- contato é a função, nesse caso -->
-        <!-- <li><a href="/contato">Contato</a></li> -->
-        <li><a href="">Disciplina</a></li>
-        <li><a href="">Contato</a></li>
-    </ul>
+    <!-- <button onclick="mensagem()">
+        Clique Aqui
+    </button> -->
+
+    <h2>Lojas de Compras</h2>
+
+    <form action="" method="post">
+        <div id="div-itens">
+        {% for i in range(0, qtd) %}
+            <input type="text" name='item' id="item{{i}}" onkeypress="mudarCor(this)">
+            <br>
+        {% endfor %}
+        </div>
+        
+        <input type="button" value="+" onclick="mais()">
+        <input type="submit">
+    </form>
+
 </body>
 </html>

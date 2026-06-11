@@ -7,23 +7,10 @@
     <script src="../static/script.js"></script>
 </head>
 <body>
-    <!-- <button onclick="mensagem()">
-        Clique Aqui
-    </button> -->
+    {% extends "base.html" %}
 
-    <h2>Lojas de Compras</h2>
-
-    <form action="" method="post">
-        <div id="div-itens">
-        {% for i in range(0, qtd) %}
-            <input type="text" name='item' id="item{{i}}" onkeypress="mudarCor(this)">
-            <br>
-        {% endfor %}
-        </div>
-        
-        <input type="button" value="+" onclick="mais()">
-        <input type="submit">
-    </form>
-
+    {% block conteudo %}
+        <h1>Bem vindo à Pizza Nossa!</h1>
+    {% endblock %}
 </body>
 </html>

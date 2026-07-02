@@ -43,6 +43,32 @@ def fale_conosco():
 def login():
 	return render_template('login.html')
  
+@app.route("/teste_insert")
+def teste_insert():
+    user = Usuario("Alba Lopes", "albasandyra@gmail.com", "123456")
+    db.session.add(user)
+    db.session.commit()
+
+
+@app.route("/teste_select")
+def teste_select():
+	u = Usuario.query.get(1)
+	return(u.nome)
+
+@app.route("/teste_update")
+def teste_update():
+	user = Usuario.query.get(1)
+	user.nome = 'Alba L'
+	db.session.add(user)
+	db.session.commit()
+	return 'Dados atualizados'
+
+@app.route("/teste_delete")
+def teste_delete():		
+	u = Usuario.query.get(1)
+	db.session.delete(u)
+	db.session.commit()
+	return 'Dados excluídos'
 
 if __name__ == '__main__':
     app.run(debug=True)

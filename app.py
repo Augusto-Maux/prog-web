@@ -1,13 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for
-from datetime import datetime # IMPORTAÇÃO
+from flask import Flask, render_template
+# from datetime import datetime
 
 from utils import db
 import os
 from flask_migrate import Migrate
-from models import Usuario
+from models import Usuario, Pizza, Pedido
 
 
-app = Flask(__name__) # INSTÂNCIA DA CLASSE FLASK
+app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 db_username = os.getenv('DB_USERNAME')
 db_password = os.getenv('DB_PASSWORD')
@@ -26,49 +26,39 @@ migrate = Migrate(app, db)
 @app.route('/')
 def inicial():
     return render_template('inicial.html')
-
-@app.route('/cardapio')
-def cardapio():
-	return render_template('cardapio.html')
-
-@app.route('/avaliacoes')
-def avaliacao():
-	return render_template('avaliacao.html')
-
-@app.route('/faleconosco')
-def fale_conosco():
-	return render_template('fale_conosco.html')
-
-@app.route('/login')
-def login():
-	return render_template('login.html')
  
 @app.route("/teste_insert")
 def teste_insert():
-    user = Usuario("Alba Lopes", "albasandyra@gmail.com", "123456")
-    db.session.add(user)
-    db.session.commit()
-
+		pizza = Pizza("Calabresa", 70.0)
+		db.session.add(pizza)
+		db.session.commit()	
+		return "Dados inseridos!"	
 
 @app.route("/teste_select")
 def teste_select():
-	u = Usuario.query.get(1)
-	return(u.nome)
+	p = Pizza.query.get(1)
+	return(p.nome)
 
 @app.route("/teste_update")
 def teste_update():
-	user = Usuario.query.get(1)
-	user.nome = 'Alba L'
+	user = Pizza.query.get(1)
+	if user:
+		user.nome = '4 Queijos'
+	else:
+		return 'Pizza não encontrada'
 	db.session.add(user)
 	db.session.commit()
 	return 'Dados atualizados'
 
 @app.route("/teste_delete")
 def teste_delete():		
-	u = Usuario.query.get(1)
-	db.session.delete(u)
+	p = Pizza.query.get(1)
+	db.session.delete(p)
 	db.session.commit()
 	return 'Dados excluídos'
+
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
     app.run(debug=True)
